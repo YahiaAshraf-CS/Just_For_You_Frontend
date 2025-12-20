@@ -51,6 +51,7 @@ function LoginPage() {
 
                     setIsLog(true);
                     navigate("/product");
+                    console.log("logged in user:", data.user);
                     setLoading(false);
                 }
             } catch {

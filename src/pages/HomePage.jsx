@@ -67,7 +67,7 @@ function HomePage() {
     return (
         <>
             {/* navbar */}
-             { currentUser!=null ? <NavbarUser className=" fixed" /> : <Navbarhome className=" fixed"/>}
+            {currentUser != null ? <NavbarUser className=" fixed" /> : <Navbarhome className=" fixed" />}
             {/* section intro */}
             <section id="intro" className=" w-full    h-fit flex flex-col items-center justify-between">
                 <main className=" w-full h-fit flex flex-col-reverse md:flex-row flex-wrap- items-center justify-center gap-4 md:gap-6 lg:gap-8 xl:gap-12 mt-18 mb-18 px-3 ">
@@ -79,7 +79,7 @@ function HomePage() {
                             memorable.{" "}
                         </p>
                         <div id="btns" className=" w-full h-fit flex items-center justify-start gap-6 mt-6 ml-15">
-                            { currentUser!=null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonPink to="/sign">Shop Now</ButtonPink> }
+                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonPink to="/sign">Shop Now</ButtonPink>}
                         </div>
                     </div>
                     <div id="images" className="flex flex-col items-center justify-center w-[80%] md:w-[45%] ">
@@ -187,24 +187,30 @@ function HomePage() {
                     <div
                         id="cards"
                         className="w-full h-fit   flex justify-center items-center flex-col md:flex-col md:gap-12 md:flex-wrap lg:gap-12 xl:flex-row lg:justify-around px-3 py-2 lg:flex-wrap lg:gap-3 xl-flex-nowrap xl:flex-nowrap xl:justify-between gap-5 mt-10">
-                        <div id="card1" className="flex shadow-2xl shadow-pink-500 rounded-2xl flex-col justify-start items-center  md:w-[95%]   gap-6 xl:w-[30%] h-[530px] px-3 py-4">
+                        <div
+                            id="card1"
+                            className="flex shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl flex-col justify-start items-center  md:w-[93%]   gap-6 xl:w-[30%] h-[530px] px-3 py-4">
                             <img src={gifts} className="w-[90%] h-[260px] rounded-2xl" alt="" />
                             <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Amazing Gifts </h3>
                             <p className="w-[90%] text-lg text-center text-gray-600">Thoughtfully curated gift boxes for birthdays, holidays, and special occasions</p>
 
-                            { currentUser!=null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight> }
+                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
                         </div>
-                        <div id="card2" className="flex flex-col shadow-2xl shadow-pink-500 rounded-2xl justify-start items-center md:w-[95%]  gap-6 xl:w-[30%]  h-[530px] px-3 py-4">
+                        <div
+                            id="card2"
+                            className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl justify-start items-center md:w-[93%]  gap-6 xl:w-[30%]  h-[530px] px-3 py-4">
                             <img src={acss} className="w-[90%] h-[260px] rounded-2xl" alt="" />
                             <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Fashion Accessories</h3>
                             <p className="w-[90%] text-center text-lg text-gray-600">Stylish Betels and accessories to complete your perfect look</p>
-                            {  currentUser!=null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight> }
+                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
                         </div>
-                        <div id="card3" className="flex flex-col shadow-2xl shadow-pink-500 rounded-2xl justify-start items-center  md:w-[95%]  gap-6 xl:w-[30%] h-[530px] px-3 py-4">
+                        <div
+                            id="card3"
+                            className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl justify-start items-center  md:w-[93%]  gap-6 xl:w-[30%] h-[530px] px-3 py-4">
                             <img src={perfumes} className="w-[90%] h-[260px] rounded-2xl" alt="" />
                             <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Wonderful Perfumes</h3>
                             <p className="w-[90%] text-center text-lg text-gray-600"> Unleash your inner goddess with our exquisite perfumes</p>
-                            { currentUser!=null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight> }
+                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
                         </div>
                     </div>
                 </main>

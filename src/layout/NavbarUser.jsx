@@ -36,6 +36,15 @@ function NavbarUser() {
         else if (window.location.pathname === "/admin") {
             navigate("/");
         }
+        else if (window.location.pathname === "/admin/add_product") {
+            navigate("/");
+        }
+        else if (window.location.pathname === "/admin/remove_product") {
+            navigate("/");
+        }
+        else if (window.location.pathname === "/admin/view_users") {
+            navigate("/");
+        }
             
         else if (window.location.pathname === "/") {
             // to stay on the same page and refresh the page
