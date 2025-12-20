@@ -48,12 +48,12 @@ function SignPage() {
               if (newUser.isAdmin === true) {
                   navigate("/admin");
                   setLoading(false);
-                  localStorage.setItem("currentUser", JSON.stringify(newUser));
+                  localStorage.setItem("currentUser", JSON.stringify(postData.user));
               }
               else {
                   navigate("/product");
                   setLoading(false);
-                  localStorage.setItem("currentUser", JSON.stringify(newUser));
+                  localStorage.setItem("currentUser", JSON.stringify(postData.user ));
               }
           }
           

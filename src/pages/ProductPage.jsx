@@ -92,6 +92,11 @@ const ProductPage = () => {
             // setIsWish(false);
             return;
         }
+        // check if stock is 0
+        if (data.stock === 0) {
+            alert("Product out of stock");
+            return;
+        }
         
         alert('Added to cart');
         
@@ -140,13 +145,17 @@ const ProductPage = () => {
 
                                         <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
                                         <h4 className="text-lg text-gray-600">{product.description}</h4>
+                                        {currentUser.is_admin === true ? (
+                                            <p className="text-pink-600 font-bold text-lg">Stock: {product.stock}</p>
+                                        ):(<h4 className="text-lg text-gray-600">{product.stock>0?"Stock":"Out of stock"}</h4>)}
                                         <p className="text-pink-600 font-bold text-lg">{product.price} SAR</p>
 
                                         <div className="flex gap-2 mt-4">
                                             <button
                                                 onClick={() => handleAddTocartlist(product)}
-                                                className="flex-1 bg-pink-500 cursor-pointer text-white py-2 rounded-lg font-bold hover:bg-pink-600 transition flex justify-center items-center gap-2">
-                                                <FaShoppingCart /> Add to cart
+                                                
+                                                className={ product.stock>0? "flex-1 bg-pink-500 cursor-pointer  text-white py-2 rounded-lg font-bold hover:bg-pink-600 transition flex justify-center items-center gap-2": "flex-1 disabled:opacity-50  bg-pink-950 cursor-pointer  text-white py-2 rounded-lg font-bold transition flex justify-center items-center gap-2"}>
+                                                <FaShoppingCart /> {product.stock>0?"Add to cart":"Out of stock"}
                                             </button>
                                             <button onClick={() => handleAddToWishlist(product)} className="p-3 bg-white text-pink-400 rounded-lg border border-pink-200 hover:bg-pink-100 transition">
                                                 <FaHeart />

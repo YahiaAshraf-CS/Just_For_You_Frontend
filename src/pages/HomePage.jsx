@@ -21,42 +21,15 @@ import { useEffect, useState } from 'react';
 import NavbarUser from '../layout/NavbarUser';
 function HomePage() {
 
-    //! how to get an api data using XMLHttpRequest
-//     const myAPI = new XMLHttpRequest();
-//    myAPI.onreadystatechange = function() {
-//        if (myAPI.readyState == 4 && myAPI.status == 200) {
-//            const data = JSON.parse(myAPI.responseText);
-//            console.log(data);
-//        }
-//    }
-//     myAPI.open("GET", "https://fakestoreapi.com/products");
-//     myAPI.send();
-//     console.log(myAPI);
-
-    
-    
-//     const mypromise = new promise((resolve, reject) => {
-//         let connect = true;
-//         setTimeout(() => {
-// if(connect) {
-//     resolve("connected")
-// } else {
-//     reject("not connected")
-// }
-//         }, 2000);
-//     })
-//     mypromise.then((message) => {
-//         console.log(message);
-//     }).catch((error) => {
-//         console.log(error);
-//     })
+  
  
     const [currentUser, setCurrentUser] = useState(null);
     
 
     
-        useEffect(() => {
-            const user = JSON.parse(localStorage.getItem("currentUser"));
+    useEffect(() => {
+            let user = JSON.parse(localStorage.getItem("currentUser"));
+            // const user = JSON.parse(localStorage.getItem("currentUser"));
             setCurrentUser(user);
              
             

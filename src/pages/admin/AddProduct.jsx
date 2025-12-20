@@ -1,112 +1,131 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import { useState } from "react";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+
 
 function AddProduct() {
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    price: 0,
-    description: "",
-    image: "",
-    category: "",
-    stock: 0
-  });
-  const [error, setError] = useState("");
-
-
-  const handleproduct = async (e) => {
-    e.preventDefault();
-    console.log(newProduct);
-    const response = await fetch("http://127.0.0.1:5000/api/admin/api/products", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newProduct),
+    const [newProduct, setNewProduct] = useState({
+        name: "",
+        price: 0,
+        description: "",
+        category: "",
+        stock: 0,
     });
-    const data = await response.json();
-    alert(data.message);
-    console.log(data);
-    if (data.status === "error") {
-      setError(data.message);
-      return;
-    }
 
-  };
+    // We store the actual File object in a separate state
+    const [imageFile, setImageFile] = useState(null);
+    const [error, setError] = useState("");
 
+    const handleProduct = async (e) => {
+        e.preventDefault();
+        setError(""); // Clear previous errors
 
-  return (
-      <div>
-          <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-center mt-50 text-pink-600">Add the New Product here</h1>
-          <div className="flex items-center justify-center mt-12">
-              <form
-                  // onSubmit={handleproduct}
-                  action=""
-                  className="flex flex-col border-2  border-pink-700  shadow-2xl shadow-pink-400 h-fill w-[95%] md:w-[70%] lg:w-[50%] xl:w-[50%] rounded-3xl px-6 py-6 items-center justify-center gap-10">
-                  <div className="flex items-center justify-center gap-4 w-full">
-                      <input
-                          value={newProduct.name}
-                          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                          type="text"
-                          required
-                          className=" outline-0 border-2 focus:placeholder-pink-700 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                          placeholder="Product Name"
-            />
-            {/* <label htmlFor="number" >enter price</label> */}
-                      <input
-                          type="number"
-                          value={newProduct.price}
-                          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-                          required
-                          className=" outline-0 border-2 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                          placeholder="product price"
-                      />
-                  </div>
-                  <input
-                      type="text"
-                      value={newProduct.description}
-                      onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                      required
-                      placeholder="Enter Description"
-                      className=" outline-0 border-2 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                  />
-                  <input
-                      type="text"
-                      value={newProduct.category}
-                      onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-                      required
-                      placeholder="Enter product category"
-                      className=" outline-0 border-2 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                  />
+        // 1. Create a FormData object (required for file uploads)
+        const formData = new FormData();
+        formData.append("name", newProduct.name);
+        formData.append("price", newProduct.price);
+        formData.append("description", newProduct.description);
+        formData.append("category", newProduct.category);
+        formData.append("stock", newProduct.stock);
 
-                  <input
-            type="file"
-            value={newProduct.image}
-            accept="image/*"
-            onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-                      required
-                      placeholder="upload your product image"
-                      className=" outline-0 border-2 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                  />
-                  <input
-                      type="number"
-                      value={newProduct.stock}
-                      onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
-                      required
-                      placeholder="Enter your product quantity"
-                      className=" outline-0 border-2 w-full px-4 py-2.5 rounded-2xl placeholder:text-pink-600 border-pink-600 focus:border-pink-800 focus:shadow-3xl focus:text-pink-700 focus:bg-pink-200"
-                  />
-                  <div className="btns w-full gap-6  h-fit flex items-center justify-center flex-col">
-                      <button
-                          onClick={handleproduct}
-                          type="submit"
-                          className=" bg-[var(--color-prinky)] text-white px-6 py-2 rounded-2xl w-[100%] transition duration-300 ease-in-out border-2 border-[var(--color-prinky)] cursor-pointer text-2xl hover:bg-transparent flex items-center justify-center  h-[45px] mt-1 hover:shadow-2xl hover:shadow-pink-500 hover:text-[var(--color-prinky)]">
-                          <span>Add Product</span>
-                      </button>
-                  </div>
-                  {error && <p className="text-2xl font-bold text-red-600">❌❌ {error} ❌❌</p>}
-              </form>
-          </div>
-      </div>
-  );
+        // 2. Append the physical file
+        if (imageFile) {
+            formData.append("image", imageFile);
+        } else {
+            setError("Please select an image");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/api/admin/api/products", {
+                method: "POST",
+                // IMPORTANT: Do NOT set Content-Type header manually when sending FormData.
+                // The browser will automatically set it to 'multipart/form-data' with the correct boundary.
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Product added successfully!");
+                // Reset form if needed
+            } else {
+                setError(data.message || "Failed to add product");
+            }
+        } catch (err) {
+            setError("Could not connect to the server.");
+            console.error(err);
+        }
+    };
+
+    return (
+        <div>
+            <h1 className="font-bold text-3xl md:text-4xl lg:text-5xl text-center mt-10 text-pink-600">Add New Product</h1>
+            <div className="flex items-center justify-center mt-12">
+                <form onSubmit={handleProduct} className="flex flex-col border-2 border-pink-700 shadow-2xl shadow-pink-400 w-[95%] md:w-[70%] lg:w-[50%] rounded-3xl px-6 py-6 items-center gap-6">
+                    <div className="flex gap-4 w-full">
+                        <input
+                            value={newProduct.name}
+                            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                            type="text"
+                            required
+                            className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600 focus:bg-pink-100"
+                            placeholder="Product Name"
+                        />
+                        <input
+                            type="number"
+                            value={newProduct.price}
+                            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                            required
+                            className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
+                            placeholder="Price"
+                        />
+                    </div>
+
+                    <input
+                        type="text"
+                        value={newProduct.description}
+                        onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                        required
+                        placeholder="Description"
+                        className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
+                    />
+
+                    <input
+                        type="file"
+                        accept="image/*"
+                        required
+                        // Capture the first file in the array
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                        className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
+                    />
+
+                    <input
+                        type="text"
+                        value={newProduct.category}
+                        onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+                        required
+                        placeholder="Category"
+                        className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
+                    />
+
+                    <input
+                        type="number"
+                        value={newProduct.stock}
+                        onChange={(e) => setNewProduct({ ...newProduct, stock: e.target.value })}
+                        required
+                        placeholder="Stock Quantity"
+                        className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
+                    />
+
+                    <button type="submit" className="bg-pink-600 text-white px-6 py-2 rounded-2xl w-full hover:bg-pink-700 transition">
+                        Add Product
+                    </button>
+
+                    {error && <p className="text-red-600 font-bold">❌ {error}</p>}
+                </form>
+            </div>
+        </div>
+    );
 }
 
-export default AddProduct
+export default AddProduct;

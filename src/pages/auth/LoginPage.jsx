@@ -58,7 +58,7 @@ function LoginPage() {
                 setError("Something went wrong");
                 setLoading(false);
             }
-        }, 1000);
+        }, 100);// end in 100 ms
     };
 
   return (
