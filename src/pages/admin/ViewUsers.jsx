@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // Remove NavLink if not used, or keep if used elsewhere
-import { FaTrash, FaUserShield } from "react-icons/fa";
+import { FaTrash, FaUserShield, FaUser, FaEnvelope } from "react-icons/fa";
 
 function ViewUsers() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -79,48 +79,84 @@ function ViewUsers() {
     }, []);
 
     return (
-        <>
-            <h1 className="text-2xl md:text-4xl text-center mt-10 md:mt-20 lg:mt-50 text-pink-600">View Users</h1>
-            <div className="flex flex-col w-full gap-6 justify-center items-center mt-4 md:mt-10 mb-10 px-4">
-                <div className="overflow-x-auto w-full">
-                    <table className="table-auto min-w-full border-0 rounded-2xl bg-pink-200 border-pink-400">
-                        <thead className="border-0 rounded-2xl border-pink-400 w-[100%]">
-                            <tr>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">ID</th>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">First Name</th>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Last Name</th>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Email</th>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Delete</th>
-                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Is Admin</th>
-                                <th className="hidden md:table-cell text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Actions</th>
+        <div className="w-full">
+            {/* Page Header */}
+            <div className="flex flex-col md:flex-row justify-between items-center mb-6">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-800">User Management</h1>
+                    <p className="text-sm text-gray-500 mt-1">
+                        Total Users: <span className="font-bold text-pink-600">{users.length}</span>
+                    </p>
+                </div>
+            </div>
+
+            {/* Table Container */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div className="overflow-x-auto">
+                    <table className="w-full whitespace-nowrap text-left border-collapse">
+                        <thead>
+                            <tr className="bg-gray-50 border-b border-gray-100 text-xs font-semibold tracking-wide text-gray-500 uppercase">
+                                <th className="px-6 py-4">User Details</th>
+                                <th className="px-6 py-4">Contact</th>
+                                <th className="px-6 py-4 text-center">Role Status</th>
+                                <th className="px-6 py-4 text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="border-0 rounded-2xl border-pink-400">
+                        <tbody className="divide-y divide-gray-100">
                             {users.map((user) => (
-                                <tr key={user.id}>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.id ? user.id : "N/A"}</td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.firstName}</td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.lastName}</td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.email}</td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">
-                                        <div className="flex items-center justify-center">
-                                            <button
-                                                className="bg-red-500 gap-2 shadow-md shadow-red-400 hover:shadow-xl hover:shadow-red-700 hover:bg-red-700 cursor-pointer transition duration-300 ease-in-out text-white font-bold flex justify-center items-center py-2 px-4 rounded-2xl"
-                                                onClick={() => delete_user(user.id)}>
-                                                <FaTrash /> Delete
-                                            </button>
+                                <tr key={user.id} className="hover:bg-gray-50 transition-colors duration-150">
+                                    {/* User Name & ID */}
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold">
+                                                {user.firstName ? user.firstName.charAt(0).toUpperCase() : <FaUser />}
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-gray-800 text-sm">
+                                                    {user.firstName} {user.lastName}
+                                                </p>
+                                                <p className="text-xs text-gray-400">ID: {user.id}</p>
+                                            </div>
                                         </div>
                                     </td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.is_admin ? "Yes" : "No"}</td>
-                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">
-                                        <div className="flex items-center justify-center">
+
+                                    {/* Email */}
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                                            <FaEnvelope className="text-gray-400" />
+                                            {user.email}
+                                        </div>
+                                    </td>
+
+                                    {/* Role Status (Is Admin) */}
+                                    <td className="px-6 py-4 text-center">
+                                        {user.is_admin ? (
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">Admin</span>
+                                        ) : (
+                                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">Customer</span>
+                                        )}
+                                    </td>
+
+                                    {/* Actions Buttons */}
+                                    <td className="px-6 py-4">
+                                        <div className="flex items-center justify-center gap-3">
+                                            {/* Make Admin Button */}
                                             {!user.is_admin && (
                                                 <button
-                                                    className="bg-green-400 gap-2 shadow-md shadow-green-300 hover:shadow-xl hover:shadow-green-500 cursor-pointer transition duration-300 ease-in-out hover:bg-green-700 text-white font-bold flex justify-center items-center py-2 px-4 rounded-2xl"
-                                                    onClick={() => makeAdmin(user.id)}>
-                                                    <FaUserShield /> Make Admin
+                                                    onClick={() => makeAdmin(user.id)}
+                                                    className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors duration-200"
+                                                    title="Promote to Admin">
+                                                    <FaUserShield size={18} />
                                                 </button>
                                             )}
+
+                                            {/* Delete Button */}
+                                            <button
+                                                onClick={() => delete_user(user.id)}
+                                                className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors duration-200"
+                                                title="Delete User">
+                                                <FaTrash size={16} />
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -128,8 +164,10 @@ function ViewUsers() {
                         </tbody>
                     </table>
                 </div>
+
+                {users.length === 0 && <div className="p-8 text-center text-gray-500">No users found.</div>}
             </div>
-        </>
+        </div>
     );
 }
 
