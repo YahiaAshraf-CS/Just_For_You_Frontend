@@ -5,6 +5,12 @@ import NavbarUser from '../../layout/NavbarUser';
 import { NavLink } from 'react-router';
 import { Outlet } from 'react-router';
 import Footer from '../../layout/Footer';
+import { FaUserLarge } from "react-icons/fa6";
+import { MdRemoveShoppingCart } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
+
+
+
 
 function AdminDashboard() {
     // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -22,13 +28,20 @@ function AdminDashboard() {
             <h1 className="text-4xl text-center mt-15 text-pink-600">welcome {currentUser && currentUser.firstName}</h1>
 
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-10 mb-10">
-                <ButtonPink to="add_product">Add Product</ButtonPink>
-                <ButtonPink to="remove_product">Remove Product</ButtonPink>
-                <ButtonPink to="view_users">View Users</ButtonPink>
-                <ButtonPink to="/admin">back to admin</ButtonPink>
+                <ButtonPink to="add_product"> <MdAddShoppingCart className="mr-2" size={18}/>Add Product</ButtonPink>
+                <ButtonPink to="remove_product"> <MdRemoveShoppingCart className="mr-2" size={18}/>Remove Product</ButtonPink>
+                <ButtonPink to="view_users" > <FaUserLarge className="mr-2" size={18}/> View Users</ButtonPink>
+                <ButtonPink to="/admin">back to Dashboard</ButtonPink>
             </div>
             <Outlet />
-            <br /><br /><br /><br /><br /><br /><br /><br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <Footer />
         </>
     );

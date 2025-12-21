@@ -6,6 +6,8 @@ import { useNavigate } from "react-router";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { setIssigned } from "../../../issigned";
+import { IoPersonAddSharp } from "react-icons/io5";
+
 
 
 
@@ -136,7 +138,9 @@ function SignPage() {
                                    {/* give me a color can be with pink*/}
                                </p>
                            ) : (
-                               "Sign Up"
+                               <p className="flex items-center justify-center text-2xl text-white gap-2">
+                                   sign up <IoPersonAddSharp color="#fff" size={22} />
+                               </p>
                            )}
                        </button>
                        <ButtonPink

@@ -117,7 +117,7 @@ function AddProduct() {
                         className="outline-0 border-2 w-full px-4 py-2.5 rounded-2xl border-pink-600"
                     />
 
-                    <button type="submit" className="bg-pink-600 text-white px-6 py-2 rounded-2xl w-full hover:bg-pink-700 transition">
+                    <button type="submit" className="bg-pink-600 text-xl lg:text-2xl text-white cursor-pointer px-5 font-bold py-2.5 rounded-xl w-full hover:bg-pink-700 transition">
                         Add Product
                     </button>
 

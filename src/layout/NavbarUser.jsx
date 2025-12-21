@@ -9,6 +9,12 @@ import { NavLink } from 'react-router-dom';
 import { setIsLog } from '../../islog';
 import { setIssigned } from '../../issigned';
 import { FaShoppingCart } from "react-icons/fa";
+import { TbLogout } from "react-icons/tb";
+import { FaHeart } from "react-icons/fa6";
+import { RiAdminFill } from "react-icons/ri";
+
+
+
  
 
 function NavbarUser() {
@@ -77,16 +83,17 @@ function NavbarUser() {
                     <NavLink to="/product" className={({ isActive }) => `${linkClass1} ${isActive ? "bg-pink-600 border-pink-500 text-white" : ""}`}>
                         Products
                     </NavLink>
-                    <NavLink to="/wish" className={({ isActive }) => `${linkClass1} ${isActive ? "bg-pink-600 border-pink-500 text-white" : ""}`}>
-                        Wishlist
+                    <NavLink to="/wish" className={({ isActive }) => `${linkClass1} ${isActive ? "bg-pink-600 flex items-center gap-2 border-pink-500 text-white" : " flex items-center gap-2"}`}>
+                        <FaHeart size={18} /> Wishlist
                     </NavLink>
                     {currentUser && currentUser.is_admin === true && (
-                        <NavLink to="/admin" className={({ isActive }) => `${linkClass1} ${isActive ? "bg-pink-600 border-pink-500 text-white" : ""}`}>
+                        <NavLink to="/admin" className={({ isActive }) => `${linkClass1} ${isActive ? "bg-pink-600 border-pink-500 flex items-center gap-2 text-white" : " flex items-center gap-2"}`}>
+                            <RiAdminFill size={18} />
                             Admin
                         </NavLink>
                     )}
-                    <button onClick={handleLogOut} className={linkClass}>
-                        Logout
+                    <button onClick={handleLogOut} className={linkClass + " flex items-center gap-2"}>
+                        <TbLogout size={18} /> Logout
                     </button>
                 </div>
 
@@ -112,16 +119,17 @@ function NavbarUser() {
                         <NavLink to="/product" className={({ isActive }) => `${linkClass1} block flex justify-center items-center w-full text-left ${isActive ? "bg-pink-800" : ""}`}>
                             Products
                         </NavLink>
-                        <NavLink to="/wish" className={({ isActive }) => `${linkClass1} block flex justify-center items-center w-full text-left ${isActive ? "bg-pink-800" : ""}`}>
-                            Wishlist
+                        <NavLink to="/wish" className={({ isActive }) => `${linkClass1} block flex justify-center gap-2 items-center w-full text-left ${isActive ? "bg-pink-800" : ""}`}>
+                           <FaHeart size={18}/> Wishlist
                         </NavLink>
                         {currentUser && currentUser.is_admin === true && (
-                            <NavLink to="/admin" className={({ isActive }) => `${linkClass1} block flex justify-center items-center w-full text-left ${isActive ? "bg-pink-800" : ""}`}>
+                            <NavLink to="/admin" className={({ isActive }) => `${linkClass1} block flex justify-center items-center gap-2 w-full text-left ${isActive ? "bg-pink-800" : ""}`}>
+                                <RiAdminFill  size={18}/>
                                 Admin
                             </NavLink>
                         )}
-                        <button onClick={handleLogOut} className={linkClass + "block flex justify-center items-center w-full text-left px-3 py-2  hover:bg-pink-800"}>
-                            Logout
+                        <button onClick={handleLogOut} className={linkClass + "block flex justify-center items-center w-full gap-2 text-left px-3 py-2  hover:bg-pink-800"}>
+                            Logout <TbLogout size={18} />
                         </button>
                     </div>
                 )}

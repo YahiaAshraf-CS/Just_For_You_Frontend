@@ -13,7 +13,7 @@ import NavbarUser from '../layout/NavbarUser'
 
 const ProductPage = () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    // const [iswish, setIsWish] = useState(false);
+     //const [iswish, setIsWish] = useState(false);
     // const navigate = useNavigate();
     
     //i want to fetch products from the backend api and display them here  http://127.0.0.1:5000/api/shop/products
@@ -70,7 +70,7 @@ const ProductPage = () => {
        
        
         alert('Added to wishlist');
-       
+         
     }
 
     const handleAddTocartlist = async (product) => {
@@ -122,13 +122,13 @@ const ProductPage = () => {
                                 <button
                                     key={cat}
                                     onClick={() => filterCategory(cat)}
-                                    className="bg-pink-400 px-4 py-1 rounded-lg shadow-md text-white shadow-pink-300 hover:shadow-pink-600 hover:shadow-xl transition-all cursor-pointer duration-300 ease-in-out hover:bg-pink-600">
+                                    className="bg-pink-400 px-4 py-2 rounded-xl shadow-md text-white shadow-pink-300 hover:shadow-pink-600 hover:shadow-xl transition-all cursor-pointer duration-300 ease-in-out hover:bg-pink-600">
                                     {cat}
                                 </button>
                             ))}
                             <button
                                 onClick={() => filterCategory("all")}
-                                className="bg-pink-400 text-white px-4 py-1 rounded-lg shadow-md shadow-pink-300 hover:shadow-pink-500 hover:shadow-xl transition-all cursor-pointer duration-300 ease-in-out hover:bg-pink-600">
+                                className="bg-pink-400 text-white px-4 py-2 rounded-xl shadow-md shadow-pink-300 hover:shadow-pink-500 hover:shadow-xl transition-all cursor-pointer duration-300 ease-in-out hover:bg-pink-600">
                                 All Categories
                             </button>
                         </div>
@@ -140,8 +140,8 @@ const ProductPage = () => {
                         {products ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                                 {filteredProducts.map((product) => (
-                                    <div key={product.id} className="bg-pink-100 rounded-2xl p-4 shadow-pink-500 shadow-md hover:shadow-xl  transition transform hover:-translate-y-1">
-                                        <img src={product.image} alt={product.name} className="w-full h-90 object-cover rounded-xl mb-4" />
+                                    <div key={product.id} className="bg-pink-100 rounded-2xl p-2.5 shadow-pink-500 shadow-md hover:shadow-xl  transition transform hover:-translate-y-1">
+                                        <img src={product.image} alt={product.name} className="w-full h-100 object-cover rounded-xl mb-4" />
 
                                         <h3 className="text-xl font-bold text-gray-800">{product.name}</h3>
                                         <h4 className="text-lg text-gray-600">{product.description}</h4>
@@ -157,7 +157,7 @@ const ProductPage = () => {
                                                 className={ product.stock>0? "flex-1 bg-pink-500 cursor-pointer  text-white py-2 rounded-lg font-bold hover:bg-pink-600 transition flex justify-center items-center gap-2": "flex-1 disabled:opacity-50  bg-pink-950 cursor-pointer  text-white py-2 rounded-lg font-bold transition flex justify-center items-center gap-2"}>
                                                 <FaShoppingCart /> {product.stock>0?"Add to cart":"Out of stock"}
                                             </button>
-                                            <button onClick={() => handleAddToWishlist(product)} className="p-3 bg-white text-pink-400 rounded-lg border border-pink-200 hover:bg-pink-100 transition">
+                                            <button onClick={() => handleAddToWishlist(product)} className="p-3 bg-pink-200 text-pink-400 rounded-lg border border-pink-400 focus:text-pink-600 hover:text-pink-600 cursor-pointer transition-all duration-300 ease-in-out ">
                                                 <FaHeart />
                                             </button>
                                         </div>

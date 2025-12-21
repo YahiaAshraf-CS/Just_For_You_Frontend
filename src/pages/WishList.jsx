@@ -58,7 +58,8 @@ function Wishlist() {
                         {wishlistItems.map((item) => (
                             <div key={item.wishlist_id} className="bg-white p-4 shadow-md rounded-lg flex items-center justify-between border border-pink-100">
                                 <div className="flex items-center gap-4">
-                                    <div>
+                                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
+                                    <div className="flex flex-col">
                                         <h3 className="font-bold text-gray-800 text-lg">{item.name}</h3>
                                         <p className="text-gray-500 text-sm">{item.category}</p>
                                         <p className="text-pink-600 font-bold">${item.price}</p>

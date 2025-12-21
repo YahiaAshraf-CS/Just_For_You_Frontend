@@ -1,61 +1,82 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from "react";
-import { FaTrash, FaUserShield } from "react-icons/fa";//the delete icon
-
-
+import React, { useState, useEffect } from "react";
+// Remove NavLink if not used, or keep if used elsewhere
+import { FaTrash, FaUserShield } from "react-icons/fa";
 
 function ViewUsers() {
-   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const [users, setUsers] = useState([]);
 
-     const api = "http://127.0.0.1:5000/api/admin/users";
-     const get_users = async () => {
-         const response = await fetch(`${api}`);
-         const data = await response.json();
-       if (data.status === "success") {
-         setUsers(data.users);
-       }
-       else {
-         console.error(data.message);
-       }
-  };
+    // Base API URL
+    const api = "http://127.0.0.1:5000/api/admin/users";
 
-  const delete_user = async (user_id) => {
-    const response = await fetch(`${api}/${user_id}`, {
-      method: "DELETE",
-    });
-    if (user_id === currentUser.id) {
-        alert("You cannot delete yourself");
-        return;
-    }
-    if (response.ok) {
-      get_users();
-    }
-    else {
-       const error = await response.json();
-      console.error("Failed to delete user : "+error.message);
-    }
+    const get_users = async () => {
+        try {
+            const response = await fetch(`${api}`);
+            const data = await response.json();
+            if (data.status === "success") {
+                setUsers(data.users);
+            } else {
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
 
-  };
-  const makeAdmin= async (user_id) => {
-    const response = await fetch(`${api}/${user_id}`, {
-      method: "POST",
-    });
-    if (response.ok) {
-      get_users();
-    }
-    else {
-      console.error("Failed to make admin");
-    }
-  };
+    const delete_user = async (user_id) => {
+        // 1. Client-side check: Prevent deleting self
+        if (currentUser && user_id === currentUser.id) {
+            alert("You cannot delete yourself.");
+            return;
+        }
+
+        // 2. Confirmation dialog
+        if (!window.confirm("Are you sure you want to delete this user?")) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${api}/${user_id}`, {
+                method: "DELETE",
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Success: Update UI
+                alert(data.message);
+                // Optimistic update: filter out the deleted user instead of calling API again
+                setUsers(users.filter((user) => user.id !== user_id));
+            } else {
+                // Error: Show message (e.g., "Cannot delete an admin user")
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error("Failed to delete user:", error);
+            alert("An error occurred while trying to delete the user.");
+        }
+    };
+
+    const makeAdmin = async (user_id) => {
+        try {
+            const response = await fetch(`${api}/${user_id}`, {
+                method: "POST", // Note: PATCH or PUT is often preferred for updates, but POST works
+            });
+            if (response.ok) {
+                get_users();
+                alert("User is now an Admin.");
+            } else {
+                const data = await response.json();
+                alert(data.message || "Failed to make admin");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     useEffect(() => {
         get_users();
     }, []);
-  
-
-    //to make the admin see all the users
 
     return (
         <>
@@ -65,41 +86,42 @@ function ViewUsers() {
                     <table className="table-auto min-w-full border-0 rounded-2xl bg-pink-200 border-pink-400">
                         <thead className="border-0 rounded-2xl border-pink-400 w-[100%]">
                             <tr>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700">ID</th>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700">First Name</th>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700">Last Name</th>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700">Email</th>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700"> Delete</th>
-                                <th className=" text-center text-md  md:text-lg lg:text-2xl border-pink-700"> is Admin</th>
-
-                                <th className="hidden md:table-cell text-center text-md md:text-lg lg:text-2xl border-pink-700">Makes Admin</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">ID</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">First Name</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Last Name</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Email</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Delete</th>
+                                <th className="text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Is Admin</th>
+                                <th className="hidden md:table-cell text-center text-md md:text-lg lg:text-2xl border-pink-700 p-2">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="border-0 rounded-2xl border-pink-400">
                             {users.map((user) => (
                                 <tr key={user.id}>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl border-pink-400">{user.id}</td>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl border-pink-400">{user.firstName}</td>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl border-pink-400">{user.lastName}</td>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl border-pink-400">{user.email}</td>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl flex items-center justify-center  border-pink-400">
-                                        <button
-                                            className="bg-red-500 gap-2.5  shadow-md shadow-red-400 hover:shadow-xl hover:shadow-red-700  hover:bg-red-700 cursor-pointer transition duration-300 ease-in-out text-white font-bold m-3 flex justify-center items-center py-2 px-4 rounded-2xl"
-                                            onClick={() => delete_user(user.id)}>
-                                            {" "}
-                                            <FaTrash />
-                                            Delete
-                                        </button>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.id ? user.id : "N/A"}</td>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.firstName}</td>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.lastName}</td>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.email}</td>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">
+                                        <div className="flex items-center justify-center">
+                                            <button
+                                                className="bg-red-500 gap-2 shadow-md shadow-red-400 hover:shadow-xl hover:shadow-red-700 hover:bg-red-700 cursor-pointer transition duration-300 ease-in-out text-white font-bold flex justify-center items-center py-2 px-4 rounded-2xl"
+                                                onClick={() => delete_user(user.id)}>
+                                                <FaTrash /> Delete
+                                            </button>
+                                        </div>
                                     </td>
-                                    <td className="border-4 text-md text-center  md:text-lg lg:text-2xl border-pink-400">{user.is_admin ? "yes" : "no"}</td>
-                                    <td className=" left-20 border-4 text-md text-center  md:text-lg lg:text-2xl flex items-center justify-center  border-pink-400">
-                                        <button
-                                            className="bg-green-400 gap-2.5 m-3 shadow-md text-sm md:text-lg lg:text-2xl shadow-green-300 hover:shadow-xl hover:shadow-green-500 cursor-pointer transition duration-300 ease-in-out hover:bg-green-700 text-white font-bold  flex justify-center items-center py-2 px-4 rounded-2xl"
-                                            onClick={() => makeAdmin(user.id)}>
-                                            {" "}
-                                            <FaUserShield className="" />
-                                            Make Admin
-                                        </button>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">{user.is_admin ? "Yes" : "No"}</td>
+                                    <td className="border-4 text-md text-center md:text-lg lg:text-2xl border-pink-400 p-2">
+                                        <div className="flex items-center justify-center">
+                                            {!user.is_admin && (
+                                                <button
+                                                    className="bg-green-400 gap-2 shadow-md shadow-green-300 hover:shadow-xl hover:shadow-green-500 cursor-pointer transition duration-300 ease-in-out hover:bg-green-700 text-white font-bold flex justify-center items-center py-2 px-4 rounded-2xl"
+                                                    onClick={() => makeAdmin(user.id)}>
+                                                    <FaUserShield /> Make Admin
+                                                </button>
+                                            )}
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -111,4 +133,4 @@ function ViewUsers() {
     );
 }
 
-export default ViewUsers
+export default ViewUsers;

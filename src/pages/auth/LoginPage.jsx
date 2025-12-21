@@ -4,7 +4,9 @@ import ButtonLight from "../../components/buttons/ButtonLight";
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import ClipLoader from "react-spinners/ClipLoader";
-import {   setIsLog } from '../../../islog';
+import { setIsLog } from '../../../islog';
+import { HiOutlineLogin } from "react-icons/hi";
+
 
 function LoginPage() {
     const navigate = useNavigate();
@@ -66,7 +68,6 @@ function LoginPage() {
           <main className=" w-full h-full border-2  flex items-center gap-12 justify-center md:justify-between lg:justify-between xl:justify-center flex-col">
               <div className="logo w-[80%] mt-12 md:w-[70%] lg:w-[50%] xl:w-[50%] h-fit px-12 py-4   rounded-3xl shadow-xl shadow-pink-400 ">
                   {" "}
-                  
                   <h1 className=" text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-center text-pink-600 m-auto ">LoginPage</h1>
                   <p className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl text-center text-pink-600 pt-9 ">Welcome Home</p>
               </div>
@@ -93,7 +94,17 @@ function LoginPage() {
                       <button
                           type="submit"
                           className="w-[100%] rounded-2xl cursor-pointer hover:shadow-2xl hover:shadow-pink-400 px-4 py-2 text-2xl text-white border-[var(--color-prinky)] bg-[var(--color-prinky)] hover:bg-transparent transition duration-300 ease-in-out hover:shadow-2xl hover:text-[var(--color-prinky)] border-2 flex items-center justify-center">
-                          {loading ?  <p> loading <ClipLoader  color='#fff' size={22} /> </p>   : "Login"}
+                          {loading ? (
+                              <p>
+                                  {" "}
+                                  loading <ClipLoader color="#fff" size={22} />{" "}
+                              </p>
+                          ) : (
+                              <p className=' flex items-center justify-center gap-2'>
+                                  {" "}
+                                  <HiOutlineLogin size={22}/> Login{" "}
+                              </p>
+                          )}
                       </button>
                       <ButtonLight className="bg-[var(--color-creamy)] hover:shadow-2xl hover:shadow-amber-400 text-2xl w-[100%] px-4 py-2 h-[50px] text-[var(--color-prinky)] rounded-2xl  px-6 py-2 rounded transition duration-300 ease-in-out border-2 border-[var(--color-creamy)] hover:border-2 hover:border-amber-400 cursor-pointer hover:bg-transparent flex items-center justify-center hover:text-amber-400">
                           Back to Home
