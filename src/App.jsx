@@ -15,6 +15,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
 import RemoveProduct from "./pages/admin/RemoveProduct";
 import ViewUsers from "./pages/admin/ViewUsers";
+import ViewOrders from "./pages/admin/ViewOrders";
+
+
 
 
 
@@ -36,15 +39,19 @@ function App() {
           children: [
               {
                   path: "add_product",
-                  element: <AddProduct/>
+                  element: <AddProduct />
               },
               {
                   path: "remove_product",
-                  element: <RemoveProduct/>
+                  element: <RemoveProduct />
               },
               {
                   path: "view_users",
                   element: <ViewUsers />
+              },
+              {
+                  path:"view_orders",
+                  element:<ViewOrders/>
               },
               {
                   path: "*",
