@@ -23,21 +23,21 @@ function AdminDashboard() {
     // http://127.0.0.1:5000/api/shop/products
 
     return (
-        <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="flex flex-col w-full min-h-screen bg-gray-50">
             <NavbarUser />
 
             {/* Main Dashboard Wrapper */}
-            <div className="flex-grow container w-full mx-auto px-4 py-8">
+            <div className="flex-grow container  w-full mx-auto min-h-screen px-2 py-5">
                 <div className="flex  w-full justify-between flex-col lg:flex-row gap-8">
                     {/* LEFT SIDEBAR: Admin Controls */}
-                    <aside className="w-full lg:w-1/4 xl:w-1/5">
+                    <aside className="w-full md:w-1/3 lg:w-1/4 xl:w-1/5.5 flex-shrink-0">
                         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sticky top-8">
                             <div className="mb-6 pb-4 border-b border-gray-100">
                                 <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">Admin Panel</h2>
                                 <p className="text-xs text-gray-500 mt-1">Manage Store & Users</p>
                             </div>
 
-                            <nav className="flex flex-col gap-3">
+                            <nav className="flex flex-col items-center justify-center gap-3">
                                 {/* Wrapped buttons to ensure they stretch or align properly in sidebar */}
                                 <div className="w-full">
                                     <ButtonPink to="add_product">

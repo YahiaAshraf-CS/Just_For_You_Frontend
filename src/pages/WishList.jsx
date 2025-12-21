@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import { FaHeart, FaTrash, FaShoppingCart } from "react-icons/fa";
 import Footer from "../layout/Footer";
 import NavbarUser from "../layout/NavbarUser";
@@ -42,38 +41,65 @@ function Wishlist() {
     };
 
     return (
-        <>
+        <div className="bg-gray-50 min-h-screen flex flex-col font-sans">
             <NavbarUser />
-            <div className="container mx-auto p-6 max-w-4xl min-h-screen">
-                <h1 className="text-3xl font-bold text-pink-600 flex justify-center gap-2 mb-8">
-                    <FaHeart /> my wishlist
-                </h1>
+
+            {/* Main Content Area */}
+            <div className="flex-grow container mx-auto px-4 py-12">
+                {/* Header */}
+                <div className="text-center mb-12">
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 flex items-center justify-center gap-3 mb-2">
+                        <FaHeart className="text-pink-600" />
+                        <span>My Wishlist</span>
+                    </h1>
+                    <p className="text-gray-500">Manage your saved items</p>
+                </div>
 
                 {wishlistItems.length === 0 ? (
-                    <div className="text-center p-10 bg-white border rounded shadow-sm">
-                        <p className="text-gray-400">your wishlist is empty</p>
+                    // Empty State Design
+                    <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                        <div className="bg-pink-50 p-6 rounded-full mb-6">
+                            <FaHeart size={48} className="text-pink-300" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-gray-800 mb-2">Your wishlist is empty</h2>
+                        <p className="text-gray-500">Seems like you haven't found anything you like yet.</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 gap-4">
+                    // Product Grid Dashboard Style
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {wishlistItems.map((item) => (
-                            <div key={item.wishlist_id} className="bg-white p-4 shadow-md rounded-lg flex items-center justify-between border border-pink-100">
-                                <div className="flex items-center gap-4">
-                                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
-                                    <div className="flex flex-col">
-                                        <h3 className="font-bold text-gray-800 text-lg">{item.name}</h3>
-                                        <p className="text-gray-500 text-sm">{item.category}</p>
-                                        <p className="text-pink-600 font-bold">${item.price}</p>
+                            <div
+                                key={item.wishlist_id}
+                                className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col relative">
+                                {/* Floating Delete Button */}
+                                <button
+                                    onClick={() => remove_from_wishlist(item.wishlist_id)}
+                                    className="absolute top-3 cursor-pointer right-3 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full text-gray-400 shadow-sm hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
+                                    title="Remove from wishlist">
+                                    <FaTrash size={16} />
+                                </button>
+
+                                {/* Image Section */}
+                                <div className="relative aspect-square overflow-hidden bg-gray-100">
+                                    <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-4">
+                                        <p className="text-white text-xs font-bold uppercase tracking-wider">{item.category}</p>
                                     </div>
                                 </div>
 
-                                <div className="flex gap-2">
+                                {/* Content Section */}
+                                <div className="p-5 flex flex-col flex-grow">
+                                    <div className="mb-4">
+                                        <h3 className="font-bold text-gray-900 text-lg leading-tight line-clamp-1 mb-1">{item.name}</h3>
+                                        <p className="text-xl font-bold text-pink-600">${item.price} SAR</p>
+                                    </div>
+
+                                    {/* Action Button */}
                                     <button
                                         onClick={() => add_to_cart(item.product_id, item.wishlist_id)}
-                                        className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 flex items-center gap-2 transition-colors">
-                                        <FaShoppingCart size={14} /> Add to Cart
-                                    </button>
-                                    <button onClick={() => remove_from_wishlist(item.wishlist_id)} className="p-2 text-gray-400 hover:text-red-500 transition-colors">
-                                        <FaTrash size={18} />
+                                        className="mt-auto w-full cursor-pointer bg-pink-600 text-white py-3 px-4 rounded-xl font-semibold shadow-md shadow-pink-200 hover:bg-pink-700 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2">
+                                        <FaShoppingCart size={18} />
+                                        <span>Move to Cart</span>
                                     </button>
                                 </div>
                             </div>
@@ -81,8 +107,9 @@ function Wishlist() {
                     </div>
                 )}
             </div>
+
             <Footer />
-        </>
+        </div>
     );
 }
 
