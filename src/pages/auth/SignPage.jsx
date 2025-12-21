@@ -130,7 +130,7 @@ function SignPage() {
                    <div className="btns w-full gap-6  h-fit flex items-center justify-center flex-col">
                        <button
                            type="submit"
-                           className=" bg-[var(--color-prinky)] text-white px-6 py-2 rounded-2xl w-[100%] transition duration-300 ease-in-out border-2 border-[var(--color-prinky)] cursor-pointer text-2xl hover:bg-transparent flex items-center justify-center  h-[45px] mt-1 hover:shadow-2xl hover:shadow-pink-500 hover:text-[var(--color-prinky)]">
+                           className="  bg-[var(--color-prinky)] text-white px-6 py-2 rounded-2xl w-[100%] transition duration-300 ease-in-out border-2 border-[var(--color-prinky)] cursor-pointer text-2xl hover:bg-transparent flex items-center justify-center gap-2  h-[45px] mt-1 hover:shadow-2xl hover:shadow-pink-500 hover:text-[var(--color-prinky)]">
                            {loading ? (
                                <p>
                                    {" "}
@@ -138,8 +138,8 @@ function SignPage() {
                                    {/* give me a color can be with pink*/}
                                </p>
                            ) : (
-                               <p className="flex items-center justify-center text-2xl text-white gap-2">
-                                   sign up <IoPersonAddSharp color="#fff" size={22} />
+                               <p className=' flex gap-2 items-center justify-center'>
+                                   sign up <IoPersonAddSharp  size={22} />
                                </p>
                            )}
                        </button>
