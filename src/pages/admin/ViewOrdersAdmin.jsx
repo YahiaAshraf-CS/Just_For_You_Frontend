@@ -15,22 +15,7 @@ function ViewOrdersAdmin() {
         }
     };
 
-    const update_status = async (order_id, new_status) => {
-        try {
-            const response = await fetch(`${api}/orders/${order_id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: new_status }),
-            });
-
-            if (response.ok) {
-                get_orders();
-            }
-        } catch (error) {
-            console.error("Error updating status:", error);
-        }
-    };
-
+    
     useEffect(() => {
         get_orders();
     }, []);
@@ -59,7 +44,7 @@ function ViewOrdersAdmin() {
 
                                 <th className="px-6 py-4 text-center">Amount</th>
                                 <th className="px-6 py-4 text-center">Status</th>
-                                <th className="px-6 py-4 text-center">Actions</th>
+                                
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
@@ -96,23 +81,11 @@ function ViewOrdersAdmin() {
 
                                     <td className="px-6 py-4 text-center">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 uppercase tracking-tight">
-                                            Paid
+                                            Panded
                                         </span>
                                     </td>
 
-                                    <td className="px-6 py-4">
-                                        <div className="flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                            <button
-                                                onClick={() => update_status(order.id, "Shipped")}
-                                                className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                                                title="Mark as Shipped">
-                                                <FaCheckCircle size={18} />
-                                            </button>
-                                            <button className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Delete Order">
-                                                <FaTrash size={16} />
-                                            </button>
-                                        </div>
-                                    </td>
+                                   
                                 </tr>
                             ))}
                         </tbody>
