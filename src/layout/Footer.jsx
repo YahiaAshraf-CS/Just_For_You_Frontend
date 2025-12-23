@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import logoimg from "../assets/images/logoimg.jpeg";
-import { FaFacebook } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTelegramPlane } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io5";
-import { FaInstagram } from "react-icons/fa";
-import { FaTelegramPlane } from "react-icons/fa";
 import "../style/Footer.css";
 import Linkicon from "../components/links/Linkicon";
-import { useEffect, useState } from "react";
 
 function Footer() {
     const [currentUser, setCurrentUser] = useState(null);
@@ -16,52 +13,73 @@ function Footer() {
         const user = JSON.parse(localStorage.getItem("currentUser"));
         setCurrentUser(user);
     }, []);
+
     return (
-        <>
-            <footer className=" w-[100%] md:w-[100%] lg:w-[100%] xl:w-[100%]  border-2 px-10 py-10 h-fit  mt-10 bg-[var(--color-dark)] flex flex-col items-center justify-center gap-1.4 lg:gap-3 xl:gap-4 p-3">
-                <div className="links w-full flex items-center flex-col gap-5 justify-center md:justify-evenly md:px-18 md:flex-row lg:justify-around lg:px-20  lg:gap-0 xl:justify-between xl:px-0 xl:gap-28 border-b-2 border-b-gray-500 pb-6">
-                    <ul className="list-none flex items-center justify-center gap-3 sm:gap-2.5 md:gap-6 lg:gap-8 xl:gap-10 text-white">
-                        <li>
-                            <div className="logo">
-                                <img
-                                    className="w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] xl:w-[65px] xl:h-[65px] rounded-tr-2xl hover:rounded-br-2xl hover:rounded-tl-2xl transition-all duration-300 ease-in-out cursor-pointer  rounded-bl-2xl"
-                                    src={logoimg}
-                                    alt=""
-                                />
-                            </div>
+        <footer className="w-full bg-slate-800 text-slate-300 py-12 mt-auto border-t border-slate-800">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+                    {/* Brand Section */}
+                    <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-pink-600 shadow-lg shadow-pink-900/20">
+                            <img className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500" src={logoimg} alt="Logo" />
+                        </div>
+                        <div>
+                            <h3 className="text-2xl font-bold text-white tracking-wide">Just For You</h3>
+                            <p className="text-sm text-slate-500">Premium Shopping Experience</p>
+                        </div>
+                    </div>
+
+                    {/* Navigation Links */}
+                    <ul className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm font-medium">
+                        <li className="hover:text-pink-500 transition-colors">
+                            <Linkicon to="/">Home</Linkicon>
                         </li>
-                        <li>
-                            {" "}
-                            <Linkicon to="/"> Home</Linkicon>{" "}
-                        </li>
-                        <li> {currentUser != null ? <Linkicon to="/product"> Products</Linkicon> : <Linkicon to="/sign"> Sign up</Linkicon>}</li>
-                        <li> {currentUser != null ? <Linkicon to="/wish"> Wishlist</Linkicon> : <Linkicon to="/auth"> Login</Linkicon>}</li>
-                        <li> {currentUser != null ? <Linkicon to="/cart"> Cart</Linkicon> : ""}</li>
+                        <li className="hover:text-pink-500 transition-colors">{currentUser != null ? <Linkicon to="/product">Products</Linkicon> : <Linkicon to="/sign">Sign up</Linkicon>}</li>
+                        <li className="hover:text-pink-500 transition-colors">{currentUser != null ? <Linkicon to="/wish">Wishlist</Linkicon> : <Linkicon to="/auth">Login</Linkicon>}</li>
+                        <li className="hover:text-pink-500 transition-colors">{currentUser != null ? <Linkicon to="/cart">Cart</Linkicon> : ""}</li>
                     </ul>
-                    <div className="socials flex items-center justify-center gap-7">
-                        <NavLink to={"https://www.facebook.com/share/1FV7p9HRC9/"}>
-                            {" "}
-                            <FaFacebook className="text-white w-[23px] h-[23px] cursor-pointer hover:text-blue-600 transition-all duration-300 ease-in-out" />{" "}
+
+                    {/* Social Media Icons */}
+                    <div className="flex items-center gap-4">
+                        <NavLink
+                            to={"https://www.facebook.com/share/1FV7p9HRC9/"}
+                            className="bg-slate-800 p-2.5 rounded-xl text-white hover:bg-blue-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <FaFacebook size={20} />
                         </NavLink>
-                        <NavLink to={"https://chat.whatsapp.com/D3hnzXbYPeL0ZPPN37g6JN?mode=ems_copy_t_invite&app_absent=0"}>
-                            {" "}
-                            <IoLogoWhatsapp className="text-white w-[23px] h-[23px] cursor-pointer hover:text-green-600 transition-all duration-300 ease-in-out" />{" "}
+
+                        <NavLink
+                            to={"https://chat.whatsapp.com/D3hnzXbYPeL0ZPPN37g6JN?mode=ems_copy_t_invite&app_absent=0"}
+                            className="bg-slate-800 p-2.5 rounded-xl text-white hover:bg-green-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <IoLogoWhatsapp size={20} />
                         </NavLink>
-                        <NavLink to={""}>
-                            {" "}
-                            <FaInstagram className="text-white w-[23px] h-[23px] cursor-pointer hover:text-pink-600 transition-all duration-300 ease-in-out" />{" "}
+
+                        <NavLink to={""} className="bg-slate-800 p-2.5 rounded-xl text-white hover:bg-pink-600 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <FaInstagram size={20} />
                         </NavLink>
-                        <NavLink to={"https://t.me/+iYwYMNCpxkQ1NjA0"}>
-                            {" "}
-                            <FaTelegramPlane className="text-white w-[23px] h-[23px] cursor-pointer hover:text-blue-600 transition-all duration-300 ease-in-out" />{" "}
+
+                        <NavLink
+                            to={"https://t.me/+iYwYMNCpxkQ1NjA0"}
+                            className="bg-slate-800 p-2.5 rounded-xl text-white hover:bg-sky-500 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                            <FaTelegramPlane size={20} />
                         </NavLink>
                     </div>
                 </div>
-                <div className="copyrights">
-                    <p className="text-[var(--color-creamy)] text-center">Copyright &copy; 2025 Just For You</p>
+
+                {/* Divider */}
+                <div className="w-full h-px bg-slate-800 my-8"></div>
+
+                {/* Copyright Section */}
+                <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+                    <p className="text-center md:text-left">
+                        Copyright &copy; 2025 <span className="text-pink-600 text-xl font-bold"> Just For You </span>. All rights reserved.
+                    </p>
+                    <div className="flex gap-4 mt-2 md:mt-0">
+                        <span className="cursor-pointer hover:text-slate-900">Privacy Policy</span>
+                        <span className="cursor-pointer hover:text-slate-900">Terms of Service</span>
+                    </div>
                 </div>
-            </footer>
-        </>
+            </div>
+        </footer>
     );
 }
 

@@ -37,7 +37,7 @@ function AddProduct() {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/admin/api/products", {
+            const response = await fetch("http://127.0.0.1:5000/api/admin/products", {
                 method: "POST",
                 // IMPORTANT: Do NOT set Content-Type header manually when sending FormData.
                 // The browser will automatically set it to 'multipart/form-data' with the correct boundary.

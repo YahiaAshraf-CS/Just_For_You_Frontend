@@ -47,13 +47,7 @@ function AdminDashboard() {
                                     </ButtonPink>
                                 </div>
 
-                                <div className="w-full">
-                                    <ButtonPink to="remove_product">
-                                        <div className="flex items-center justify-center w-full">
-                                            <MdRemoveShoppingCart className="mr-2" size={18} /> Remove Product
-                                        </div>
-                                    </ButtonPink>
-                                </div>
+                                
 
                                 <div className="w-full">
                                     <ButtonPink to="view_users">

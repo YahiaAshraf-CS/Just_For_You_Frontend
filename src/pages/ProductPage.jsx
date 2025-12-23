@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { FaHeart, FaShoppingCart,FaTrash } from "react-icons/fa";
 import Footer from "../layout/Footer";
 import ButtonPink from "../components/buttons/ButtonPink"; // Keeping import, though not used in new layout to keep logic safe
 import NavbarUser from "../layout/NavbarUser";
+
 
 const ProductPage = () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -11,7 +12,7 @@ const ProductPage = () => {
     const [filteredProducts, setFilteredProducts] = useState(products);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/api/shop/products")
+        fetch("http://127.0.0.1:5000/api/products")
             .then((response) => response.json())
             .then((data) => setProducts(data))
             .catch((error) => console.error(error));
@@ -31,7 +32,7 @@ const ProductPage = () => {
     };
 
     const handleAddToWishlist = async (product) => {
-        const response = await fetch("http://127.0.0.1:5000/api/shop/api/wishlist", {
+        const response = await fetch("http://127.0.0.1:5000/api/wishlist", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +57,7 @@ const ProductPage = () => {
     };
 
     const handleAddTocartlist = async (product) => {
-        const response = await fetch("http://127.0.0.1:5000/api/shop/cart", {
+        const response = await fetch("http://127.0.0.1:5000/api/cart", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -79,6 +80,31 @@ const ProductPage = () => {
         }
 
         alert("Added to cart");
+    };
+    const delete_product = async (product) => {
+        // Debugging: Check if ID exists before sending
+        if (!product || !product.id) {
+            console.error("Error: Product ID is missing!", product);
+            return;
+        }
+
+        try {
+            // Correct URL structure to match Flask: /products/<id>
+            const response = await fetch(`http://127.0.0.1:5000/api/admin/products/${product.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                console.error("Failed to delete. Status:", response.status);
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+        }
     };
 
     return (
@@ -113,7 +139,9 @@ const ProductPage = () => {
                             {cat}
                         </button>
                     ))}
-                    <button onClick={() => filterCategory("all")} className="px-6 py-2.5 rounded-2xl cursor-pointer bg-gray-800 text-white font-medium hover:bg-gray-900 transition-all duration-200 shadow-md">
+                    <button
+                        onClick={() => filterCategory("all")}
+                        className="px-6 py-2.5 rounded-2xl cursor-pointer bg-gray-800 text-white font-medium hover:bg-gray-900 transition-all duration-200 shadow-md">
                         All Categories
                     </button>
                 </div>
@@ -128,6 +156,22 @@ const ProductPage = () => {
                                     className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                                     {/* Product Image */}
                                     <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                                        {/* Product Image */}
+                                        {currentUser && currentUser.is_admin === true ? (
+                                            <button
+                                                // 1. Add 'type="button"' to prevent form submission
+                                                type="button"
+                                                // 2. Pass the event 'e' to stop propagation
+                                                onClick={(e) => {
+                                                    e.preventDefault(); // Stops form submit behavior
+                                                    e.stopPropagation(); // Stops clicking the parent card
+                                                    delete_product(product);
+                                                }}
+                                                className="absolute top-3 cursor-pointer right-3 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full text-gray-400 shadow-sm hover:bg-red-50 hover:text-red-600 transition-colors duration-200"
+                                                title="Remove from wishlist">
+                                                <FaTrash size={16} />
+                                            </button>
+                                        ) : null}
                                         <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                         {/* Badge for Stock Status */}
                                         {product.stock <= 0 && <div className="absolute top-3 right-3 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">Sold Out</div>}

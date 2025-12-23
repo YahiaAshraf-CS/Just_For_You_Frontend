@@ -6,7 +6,7 @@ import NavbarUser from "../layout/NavbarUser";
 function Wishlist() {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const [wishlistItems, setWishlistItems] = useState([]);
-    const api = "http://127.0.0.1:5000/api/shop/api";
+    const api = "http://127.0.0.1:5000/api";
     const user_id = currentUser.id;
 
     useEffect(() => {
@@ -29,7 +29,7 @@ function Wishlist() {
     };
 
     const add_to_cart = async (product_id) => {
-        const response = await fetch(`http://127.0.0.1:5000/api/shop/cart`, {
+        const response = await fetch(`http://127.0.0.1:5000/api/cart`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id, product_id, quantity: 1 }),

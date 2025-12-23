@@ -13,7 +13,7 @@ import WishList from "./pages/WishList";
 import AddToCart from "./pages/AddToCart";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
-import RemoveProduct from "./pages/admin/RemoveProduct";
+
 import ViewUsers from "./pages/admin/ViewUsers";
 import ViewOrders from "./pages/admin/ViewOrders";
 
@@ -41,10 +41,7 @@ function App() {
                   path: "add_product",
                   element: <AddProduct />
               },
-              {
-                  path: "remove_product",
-                  element: <RemoveProduct />
-              },
+             
               {
                   path: "view_users",
                   element: <ViewUsers />
