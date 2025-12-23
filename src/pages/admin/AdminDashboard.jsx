@@ -9,7 +9,7 @@ import { FaUserLarge } from "react-icons/fa6";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { MdAddShoppingCart } from "react-icons/md";
 // import { MdDelete } from "react-icons/md";
-import ViewOrders from "./ViewOrders";
+import ViewOrders from "./ViewOrdersAdmin";
 import { MdDashboard } from "react-icons/md"; // Added for visual polish (optional)
 
 function AdminDashboard() {

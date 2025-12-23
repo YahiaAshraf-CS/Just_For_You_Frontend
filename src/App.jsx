@@ -15,7 +15,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AddProduct from "./pages/admin/AddProduct";
 
 import ViewUsers from "./pages/admin/ViewUsers";
-import ViewOrders from "./pages/admin/ViewOrders";
+import ViewOrders from "./pages/ViewOrders";
+import ViewOrdersAdmin from "./pages/admin/ViewOrdersAdmin";
 
 
 
@@ -30,6 +31,7 @@ function App() {
       { path: "/", element: <HomePage /> },
       { path: "/auth", element: <LoginPage /> },
       { path: "/sign", element: <SignPage /> },
+      {path:"/orders",element:<ViewOrders/>},
       { path: "/product", element: <ProductPage /> },
       { path: "/wish", element: <WishList /> },
       { path: "/cart", element: <AddToCart /> },
@@ -48,7 +50,7 @@ function App() {
               },
               {
                   path:"view_orders",
-                  element:<ViewOrders/>
+                  element:<ViewOrdersAdmin/>
               },
               {
                   path: "*",

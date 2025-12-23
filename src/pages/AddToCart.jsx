@@ -1,7 +1,7 @@
 import NavbarUser from "../layout/NavbarUser";
 import Footer from "../layout/Footer";
 import { useEffect, useState } from "react";
-import { FaShoppingCart, FaTrash, FaArrowRight } from "react-icons/fa";
+import { FaShoppingCart, FaTrash, FaArrowRight, FaPlus, FaMinus } from "react-icons/fa";
 
 const AddToCart = () => {
     const api = "http://127.0.0.1:5000/api";
@@ -27,6 +27,59 @@ const AddToCart = () => {
 
         if (response.ok) {
             get_cart();
+        }
+    };
+    const increase_quantity = async (cart_id) => {
+        const response = await fetch(`${api}/cart/${cart_id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ quantity: 1 }),
+        });
+
+        if (response.ok) {
+            get_cart();
+        }
+    };
+
+    const decrease_quantity = async (cart_id) => {
+        // FIX: Updated URL to match the new backend route
+        const response = await fetch(`${api}/cart/${cart_id}/decrease`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+        });
+
+        if (response.ok) {
+            get_cart();
+        }
+    };
+    // 1. Accept user_id as a parameter
+    const order = async (user_id) => {
+        // Safety check: ensure we have a user
+        if (!user_id) {
+            alert("User ID is missing. Please log in.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${api}/orders`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: user_id }),
+            });
+
+            // 2. Parse the JSON response immediately
+            const data = await response.json();
+
+            if (response.ok) {
+                get_cart(); // Clear the UI cart
+                alert("Order placed successfully!");
+            } else {
+                // 3. Show the ACTUAL error from backend (e.g., "Insufficient stock")
+                alert(data.message || "Failed to place order.");
+            }
+        } catch (error) {
+            console.error("Error placing order:", error);
+            alert("Network error.");
         }
     };
 
@@ -90,6 +143,23 @@ const AddToCart = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        <div className="flex items-center gap-2">
+                                            {/* Increase Quantity */}
+                                            <button
+                                                onClick={() => increase_quantity(item.id)}
+                                                className="p-3 text-gray-400 hover:text-pink-600 hover:bg-pink-50 rounded-xl transition-all duration-200"
+                                                title="Increase Quantity">
+                                                <FaPlus size={18} />
+                                            </button>
+
+                                            {/* Decrease Quantity */}
+                                            <button
+                                                onClick={() => decrease_quantity(item.id)}
+                                                className="p-3 text-gray-400 hover:text-pink-600 hover:bg-pink-50 rounded-xl transition-all duration-200"
+                                                title="Decrease Quantity">
+                                                <FaMinus size={18} />
+                                            </button>
+                                        </div>
 
                                         {/* Delete Action */}
                                         <button
@@ -127,7 +197,9 @@ const AddToCart = () => {
                                 </div>
 
                                 {/* Placeholder Checkout Button (Visual Only as per instructions) */}
-                                <button className="w-full bg-pink-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 flex justify-center items-center gap-2">
+                                <button
+                                    onClick={()=> order( currentUser.id)}
+                                    className="w-full bg-pink-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 flex justify-center items-center gap-2">
                                     Checkout Now <FaArrowRight size={16} />
                                 </button>
 

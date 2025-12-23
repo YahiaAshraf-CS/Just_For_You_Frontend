@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ViewOrders() {
+function ViewOrdersAdmin() {
   return (
     <div>
       <h1>View Orders</h1>
@@ -8,4 +8,4 @@ function ViewOrders() {
   )
 }
 
-export default ViewOrders
+export default ViewOrdersAdmin
