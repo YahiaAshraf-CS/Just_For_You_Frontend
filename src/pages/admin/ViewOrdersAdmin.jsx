@@ -3,7 +3,7 @@ import { FaEnvelope, FaTrash, FaCheckCircle, FaBox } from "react-icons/fa";
 
 function ViewOrdersAdmin() {
     const [orders, setOrders] = useState([]);
-    const api = "http://127.0.0.1:5000/api/admin/orders";
+    const api = "https://justforyoubackend-production.up.railway.app/api/admin/orders";
 
     const get_orders = async () => {
         try {

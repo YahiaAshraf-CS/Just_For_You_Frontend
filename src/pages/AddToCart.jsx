@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart, FaTrash, FaArrowRight, FaPlus, FaMinus } from "react-icons/fa";
 
 const AddToCart = () => {
-    const api = "http://127.0.0.1:5000/api";
+    const api = "https://justforyoubackend-production.up.railway.app/api";
     const [cartlist, setCartlist] = useState([]);
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));

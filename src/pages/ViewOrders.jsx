@@ -7,7 +7,7 @@ function ViewOrders() {
    const [orders, setOrders] = useState([]);
 
   
-   const api = "http://127.0.0.1:5000/api/orders/";
+   const api = "https://justforyoubackend-production.up.railway.app/api/orders/";
 
    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
    const user_id = currentUser?.id;

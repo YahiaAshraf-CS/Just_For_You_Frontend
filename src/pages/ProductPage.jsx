@@ -12,7 +12,7 @@ const ProductPage = () => {
     const [filteredProducts, setFilteredProducts] = useState(products);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5000/api/products")
+        fetch("https://justforyoubackend-production.up.railway.app/api/products")
             .then((response) => response.json())
             .then((data) => setProducts(data))
             .catch((error) => console.error(error));
@@ -32,7 +32,7 @@ const ProductPage = () => {
     };
 
     const handleAddToWishlist = async (product) => {
-        const response = await fetch("http://127.0.0.1:5000/api/wishlist", {
+        const response = await fetch("https://justforyoubackend-production.up.railway.app/api/wishlist", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const ProductPage = () => {
     };
 
     const handleAddTocartlist = async (product) => {
-        const response = await fetch("http://127.0.0.1:5000/api/cart", {
+        const response = await fetch("https://justforyoubackend-production.up.railway.app/api/cart", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -90,7 +90,7 @@ const ProductPage = () => {
 
         try {
             // Correct URL structure to match Flask: /products/<id>
-            const response = await fetch(`http://127.0.0.1:5000/api/admin/products/${product.id}`, {
+            const response = await fetch(`https://justforyoubackend-production.up.railway.app/api/admin/products/${product.id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
