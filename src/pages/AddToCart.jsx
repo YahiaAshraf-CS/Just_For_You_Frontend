@@ -181,25 +181,25 @@ const AddToCart = () => {
                                 <div className="space-y-3 mb-6">
                                     <div className="flex justify-between text-gray-600">
                                         <span>Subtotal</span>
-                                        <span>${total} SAR</span>
+                                        <span>{total} <span className="text-sm text-gray-500">EGP </span></span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
                                         <span>Shipping</span>
-                                        <span className="text-green-600 text-sm font-medium">Free</span>
+                                        <span className="text-green-600 text-sm font-medium">you will come to get it after payment</span>
                                     </div>
                                 </div>
 
                                 <div className="flex justify-between items-center border-t border-gray-100 pt-4 mb-6">
                                     <span className="text-lg font-bold text-gray-900">Total</span>
                                     <span className="text-2xl font-bold text-pink-600">
-                                        ${total} <span className="text-sm text-gray-500">SAR</span>
+                                        {total} <span className="text-sm text-gray-500">EGP</span>
                                     </span>
                                 </div>
 
                                 {/* Placeholder Checkout Button (Visual Only as per instructions) */}
                                 <button
                                     onClick={()=> order( currentUser.id)}
-                                    className="w-full bg-pink-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 flex justify-center items-center gap-2">
+                                    className="w-full bg-pink-600 cursor-pointer text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 flex justify-center items-center gap-2">
                                     Checkout Now <FaArrowRight size={16} />
                                 </button>
 

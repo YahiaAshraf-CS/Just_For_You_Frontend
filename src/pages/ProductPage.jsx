@@ -155,7 +155,7 @@ const ProductPage = () => {
                                     key={product.id}
                                     className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                                     {/* Product Image */}
-                                    <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                                    <div className="relative aspect-[4/4] overflow-hidden bg-gray-100">
                                         {/* Product Image */}
                                         {currentUser && currentUser.is_admin === true ? (
                                             <button
