@@ -37,7 +37,7 @@ function AddProduct() {
         }
 
         try {
-            const response = await fetch("https://just-for-you-backend-el84hu9cb.vercel.app/api/admin/products", {
+            const response = await fetch("https://justforyoubackend-production.up.railway.app/api/admin/products", {
                 method: "POST",
                 // IMPORTANT: Do NOT set Content-Type header manually when sending FormData.
                 // The browser will automatically set it to 'multipart/form-data' with the correct boundary.

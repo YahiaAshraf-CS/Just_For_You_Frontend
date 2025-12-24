@@ -7,7 +7,7 @@ function Wishlist() {
     //https://justforyoubackend-production.up.railway.app/api
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const [wishlistItems, setWishlistItems] = useState([]);
-    const api = "https://just-for-you-backend-el84hu9cb.vercel.app/api";
+    const api = "https://justforyoubackend-production.up.railway.app/api";
     const user_id = currentUser.id;
 
     useEffect(() => {
@@ -30,7 +30,7 @@ function Wishlist() {
     };
 
     const add_to_cart = async (product_id) => {
-        const response = await fetch(`https://just-for-you-backend-el84hu9cb.vercel.app/api/cart`, {
+        const response = await fetch(`https://justforyoubackend-production.up.railway.app/api/cart`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ user_id, product_id, quantity: 1 }),
