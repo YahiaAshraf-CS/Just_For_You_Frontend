@@ -7,7 +7,7 @@ function ViewUsers() {
     const [users, setUsers] = useState([]);
 
     // Base API URL
-    const api = "https://justforyoubackend-production.up.railway.app/api/admin/users";
+    const api = "https://just-for-you-backend-el84hu9cb.vercel.app/api/admin/users";
 
     const get_users = async () => {
         try {

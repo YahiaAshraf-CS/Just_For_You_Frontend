@@ -7,7 +7,7 @@ function ViewOrders() {
    const [orders, setOrders] = useState([]);
 
   
-   const api = "https://justforyoubackend-production.up.railway.app/api/orders/";
+   const api = "https://just-for-you-backend-el84hu9cb.vercel.app/api/orders/";
 
    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
    const user_id = currentUser?.id;

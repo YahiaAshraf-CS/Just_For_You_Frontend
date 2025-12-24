@@ -34,7 +34,7 @@ function SignPage() {
       try {
 
 
-        const postRes = await fetch("https://justforyoubackend-production.up.railway.app/api/signup", {
+        const postRes = await fetch("https://just-for-you-backend-el84hu9cb.vercel.app/api/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newUser),

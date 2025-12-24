@@ -26,7 +26,7 @@ function LoginPage() {
      
             try {
                 
-                const res = await fetch(`https://justforyoubackend-production.up.railway.app/api/login`, {
+                const res = await fetch(`https://just-for-you-backend-el84hu9cb.vercel.app/api/login`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password }),
