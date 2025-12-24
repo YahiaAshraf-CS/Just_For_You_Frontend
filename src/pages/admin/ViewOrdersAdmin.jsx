@@ -80,7 +80,7 @@ function ViewOrdersAdmin() {
                                         <span className="font-bold text-gray-800 text-sm">{order.quantity}</span>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <span className="font-bold text-gray-800 text-sm">${order.total_price}</span>
+                                        <span className="font-bold text-gray-800 text-sm">{order.total_price} EGP</span>
                                     </td>
 
                                     <td className="px-6 py-4 text-center">

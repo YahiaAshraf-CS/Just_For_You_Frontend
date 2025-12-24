@@ -181,7 +181,7 @@ const ProductPage = () => {
                                     <div className="p-5 flex flex-col flex-grow">
                                         <div className="flex justify-between items-start mb-2">
                                             <h3 className="text-lg font-bold text-gray-900 line-clamp-1">{product.name}</h3>
-                                            <span className="text-pink-600 font-bold whitespace-nowrap">{product.price} SAR</span>
+                                            <span className="text-pink-600 font-bold whitespace-nowrap">{product.price} EGP</span>
                                         </div>
 
                                         <p className="text-sm text-gray-500 mb-4 line-clamp-2 flex-grow">{product.description}</p>

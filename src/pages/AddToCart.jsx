@@ -139,7 +139,7 @@ const AddToCart = () => {
 
                                                 {/* Price */}
                                                 <div className="mt-4 sm:mt-0 text-xl font-bold text-pink-600">
-                                                    ${item.price} <span className="text-xs text-gray-500 font-normal">SAR</span>
+                                                    ${item.price} <span className="text-xs text-gray-500 font-normal"> EGP</span>
                                                 </div>
                                             </div>
                                         </div>
