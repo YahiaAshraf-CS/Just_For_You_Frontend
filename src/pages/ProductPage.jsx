@@ -174,7 +174,7 @@ const ProductPage = () => {
                                         ) : null}
                                         <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                         {/* Badge for Stock Status */}
-                                        {product.stock <= 0 && <div className="absolute top-3 right-3 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">Sold Out</div>}
+                                        {product.stock <= 0 && <div className="absolute top-3 left-3 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">Sold Out</div>}
                                     </div>
 
                                     {/* Product Details */}

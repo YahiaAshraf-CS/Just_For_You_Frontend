@@ -198,6 +198,7 @@ const AddToCart = () => {
 
                                 {/* Placeholder Checkout Button (Visual Only as per instructions) */}
                                 <button
+                                
                                     onClick={()=> order( currentUser.id)}
                                     className="w-full bg-pink-600 cursor-pointer text-white py-4 rounded-xl font-bold text-lg hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 flex justify-center items-center gap-2">
                                     Checkout Now <FaArrowRight size={16} />
