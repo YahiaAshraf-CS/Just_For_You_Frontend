@@ -1,13 +1,14 @@
+
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaShoppingCart,FaTrash } from "react-icons/fa";
+import { FaHeart, FaPlus, FaMinus, FaShoppingCart,FaTrash } from "react-icons/fa";
 import Footer from "../layout/Footer";
 import ButtonPink from "../components/buttons/ButtonPink"; // Keeping import, though not used in new layout to keep logic safe
 import NavbarUser from "../layout/NavbarUser";
 
 
 const ProductPage = () => {
+     
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -30,8 +31,11 @@ const ProductPage = () => {
             setFilteredProducts(result);
         }
     };
+  
 
-    const handleAddToWishlist = async (product) => {
+       
+    
+    async function handleAddToWishlist(product) {
         const response = await fetch("https://justforyoubackend-production.up.railway.app/api/wishlist", {
             method: "POST",
             headers: {
@@ -54,7 +58,7 @@ const ProductPage = () => {
         }
 
         alert("Added to wishlist");
-    };
+    }
 
     const handleAddTocartlist = async (product) => {
         const response = await fetch("https://justforyoubackend-production.up.railway.app/api/cart", {
@@ -189,9 +193,11 @@ const ProductPage = () => {
                                         {/* Stock Info (Admin vs User) */}
                                         <div className="mb-4 text-sm">
                                             {currentUser && currentUser.is_admin === true ? (
-                                                <div className="flex items-center text-gray-700 bg-gray-50 p-2 rounded-lg">
+                                                <div className="flex items-center text-gray-700 gap-3 bg-gray-50 p-2 rounded-lg">
                                                     <span className="font-semibold mr-2">Inventory:</span>
+
                                                     <span className={product.stock > 5 ? "text-green-600 font-bold" : "text-red-600 font-bold"}>{product.stock} units</span>
+                                                     
                                                 </div>
                                             ) : (
                                                 <span className={`text-xs font-bold px-2 py-1 rounded ${product.stock > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>

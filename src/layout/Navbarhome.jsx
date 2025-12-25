@@ -7,6 +7,7 @@ import "../style/Navbar.css";
 import { NavLink } from "react-router";
 
 function Navbarhome() {
+    
     return (
         <>
             {/* Header: 
