@@ -3,7 +3,7 @@ import { FaEnvelope, FaTrash, FaCheckCircle, FaBox } from "react-icons/fa";
 
 function ViewOrdersAdmin() {
     const [orders, setOrders] = useState([]);
-    const api = "http://127.0.0.1:5000/api/admin/orders";
+    const api = "https://justforyoubackend-production.up.railway.app/api/admin/orders";
 
     const get_orders = async () => {
         try {
@@ -81,7 +81,7 @@ function ViewOrdersAdmin() {
 
                                     <td className="px-6 py-4 text-center">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 uppercase tracking-tight">
-                                            Panded
+                                            Pending
                                         </span>
                                     </td>
 

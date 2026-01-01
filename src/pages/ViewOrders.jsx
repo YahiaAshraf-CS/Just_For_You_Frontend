@@ -7,7 +7,7 @@ function ViewOrders() {
    const [orders, setOrders] = useState([]);
 
   
-   const api = "http://127.0.0.1:5000/api/orders/";
+   const api = "https://justforyoubackend-production.up.railway.app/api/orders/";
 
    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
    const user_id = currentUser?.id;
@@ -86,7 +86,7 @@ function ViewOrders() {
                                     </div>
                                     <div className="flex flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
                                         <div className="text-2xl font-black text-pink-600">
-                                            ${order.total_price} <span className="text-xs text-gray-400 font-normal">SAR</span>
+                                            ${order.total_price} <span className="text-xs text-gray-400 font-normal">EGP</span>
                                         </div>
                                         <span className="inline-flex items-center gap-1 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-600 border border-green-100">
                                             <FaCheckCircle size={10} /> Paid & Confirmed

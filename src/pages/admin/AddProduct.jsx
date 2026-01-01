@@ -37,7 +37,7 @@ function AddProduct() {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/admin/products", {
+            const response = await fetch("https://justforyoubackend-production.up.railway.app/api/admin/products", {
                 method: "POST",
                 // IMPORTANT: Do NOT set Content-Type header manually when sending FormData.
                 // The browser will automatically set it to 'multipart/form-data' with the correct boundary.
@@ -109,7 +109,7 @@ function AddProduct() {
 
                         {/* Price */}
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Price (SAR)</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Price (EGP)</label>
                             <div className="relative">
                                 <span className="absolute left-4 top-3.5 text-gray-400">
                                     <FaDollarSign />

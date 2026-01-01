@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart, FaTrash, FaArrowRight, FaPlus, FaMinus } from "react-icons/fa";
 
 const AddToCart = () => {
-    const api = "http://127.0.0.1:5000/api";
+    const api = "https://justforyoubackend-production.up.railway.app/api";
     const [cartlist, setCartlist] = useState([]);
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -139,7 +139,7 @@ const AddToCart = () => {
 
                                                 {/* Price */}
                                                 <div className="mt-4 sm:mt-0 text-xl font-bold text-pink-600">
-                                                    ${item.price} <span className="text-xs text-gray-500 font-normal">SAR</span>
+                                                    ${item.price} <span className="text-xs text-gray-500 font-normal">EGP</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,7 +181,7 @@ const AddToCart = () => {
                                 <div className="space-y-3 mb-6">
                                     <div className="flex justify-between text-gray-600">
                                         <span>Subtotal</span>
-                                        <span>${total} SAR</span>
+                                        <span>${total} EGP</span>
                                     </div>
                                     <div className="flex justify-between text-gray-600">
                                         <span>Shipping</span>
@@ -192,7 +192,7 @@ const AddToCart = () => {
                                 <div className="flex justify-between items-center border-t border-gray-100 pt-4 mb-6">
                                     <span className="text-lg font-bold text-gray-900">Total</span>
                                     <span className="text-2xl font-bold text-pink-600">
-                                        ${total} <span className="text-sm text-gray-500">SAR</span>
+                                        ${total} <span className="text-sm text-gray-500">EGP</span>
                                     </span>
                                 </div>
 

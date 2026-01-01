@@ -7,7 +7,7 @@ function ViewUsers() {
     const [users, setUsers] = useState([]);
 
     // Base API URL
-    const api = "http://127.0.0.1:5000/api/admin/users";
+    const api = "https://justforyoubackend-production.up.railway.app/api/admin/users";
 
     const get_users = async () => {
         try {
