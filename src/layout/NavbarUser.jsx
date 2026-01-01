@@ -20,7 +20,6 @@ import { GrFormView } from "react-icons/gr";
 
 function NavbarUser() {
     const navigate = useNavigate();
- // يطبع اسم المستخدم الحالي لو موجود
     const [currentUser, setCurrentUser] = useState(null);
     const [isOpen, setIsOpen] = useState(false);        
 
@@ -54,7 +53,6 @@ function NavbarUser() {
         }
             
         else if (window.location.pathname === "/") {
-            // to stay on the same page and refresh the page
             navigate(0);
         }
         else {
