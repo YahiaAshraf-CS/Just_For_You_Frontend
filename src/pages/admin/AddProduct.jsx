@@ -66,18 +66,20 @@ function AddProduct() {
                 <p className="text-sm text-gray-500 mt-1">Create a new item in your inventory.</p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-                <form onSubmit={handleProduct} className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+            <div className="max-w-4xl mx-auto w-full px-4 sm:px-6">
+                <form onSubmit={handleProduct} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 sm:p-8">
                     {/* Form Header */}
-                    <div className="border-b border-gray-100 pb-6 mb-6">
+                    <div className="border-b border-gray-100 pb-4 mb-4 sm:pb-6 sm:mb-6">
                         <h2 className="text-lg font-semibold text-gray-700 flex items-center gap-2">
-                            <FaBoxOpen className="text-pink-600" /> Product Details
+                            <FaBoxOpen className="text-pink-600" />
+                            <span>Product Details</span>
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    {/* Grid Container: 1 col on mobile, 2 cols on tablet+ */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
                         {/* Name */}
-                        <div className="col-span-2 md:col-span-1">
+                        <div className="col-span-1">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Product Name</label>
                             <input
                                 value={newProduct.name}
@@ -90,7 +92,7 @@ function AddProduct() {
                         </div>
 
                         {/* Category */}
-                        <div className="col-span-2 md:col-span-1">
+                        <div className="col-span-1">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
                             <div className="relative">
                                 <span className="absolute left-4 top-3.5 text-gray-400">
@@ -108,7 +110,7 @@ function AddProduct() {
                         </div>
 
                         {/* Price */}
-                        <div>
+                        <div className="col-span-1">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Price (EGP)</label>
                             <div className="relative">
                                 <span className="absolute left-4 top-3.5 text-gray-400">
@@ -126,7 +128,7 @@ function AddProduct() {
                         </div>
 
                         {/* Stock */}
-                        <div>
+                        <div className="col-span-1">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Stock Quantity</label>
                             <div className="relative">
                                 <span className="absolute left-4 top-3.5 text-gray-400">
@@ -143,8 +145,8 @@ function AddProduct() {
                             </div>
                         </div>
 
-                        {/* Description */}
-                        <div className="col-span-2">
+                        {/* Description - Spans full width on all screens */}
+                        <div className="col-span-1 md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
                             <textarea
                                 value={newProduct.description}
@@ -155,35 +157,36 @@ function AddProduct() {
                                 className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-pink-500 focus:bg-white focus:ring-2 focus:ring-pink-200 outline-none transition-all duration-200 resize-none"></textarea>
                         </div>
 
-                        {/* Image Upload */}
-                        <div className="col-span-2">
+                        {/* Image Upload - Spans full width */}
+                        <div className="col-span-1 md:col-span-2">
                             <label className="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
-                            <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors bg-gray-50">
-                                <FaCloudUploadAlt className="text-4xl text-gray-400 mb-2" />
-                                <span className="text-sm text-gray-500 mb-2">Click to upload image</span>
+                            <div className="border-2 border-dashed border-gray-300 rounded-xl p-4 sm:p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors bg-gray-50 relative overflow-hidden">
+                                <FaCloudUploadAlt className="text-3xl sm:text-4xl text-gray-400 mb-2" />
+                                <span className="text-xs sm:text-sm text-gray-500 mb-2">Click to upload image</span>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     required
                                     onChange={(e) => setImageFile(e.target.files[0])}
-                                    className="block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-full file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-pink-50 file:text-pink-700
-                                    hover:file:bg-pink-100 cursor-pointer"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                 />
+                                {/* Visual fake input for better styling */}
+                                <div className="text-xs text-gray-400 mt-1">SVG, PNG, JPG (Max 2MB)</div>
                             </div>
                         </div>
                     </div>
 
                     {/* Error Message */}
-                    {error && <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg text-sm font-semibold border border-red-100">❌ {error}</div>}
+                    {error && (
+                        <div className="mb-6 p-3 sm:p-4 bg-red-50 text-red-600 rounded-lg text-sm font-semibold border border-red-100 flex items-center gap-2">
+                            <span>❌</span> {error}
+                        </div>
+                    )}
 
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-pink-600 text-white font-bold py-3.5 rounded-xl hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 transform hover:-translate-y-0.5">
+                        className="w-full bg-pink-600 cursor-pointer text-white font-bold py-3 sm:py-3.5 rounded-xl hover:bg-pink-700 hover:shadow-lg shadow-pink-200 transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 text-sm sm:text-base">
                         Publish Product
                     </button>
                 </form>

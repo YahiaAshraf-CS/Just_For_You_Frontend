@@ -35,9 +35,9 @@ function SignPage() {
 
 
         const postRes = await fetch("https://justforyoubackend-production.up.railway.app/api/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newUser),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newUser),
         });
         const postData = await postRes.json();
 

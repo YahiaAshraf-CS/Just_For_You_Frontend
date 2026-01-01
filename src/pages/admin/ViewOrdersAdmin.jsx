@@ -40,9 +40,10 @@ function ViewOrdersAdmin() {
                                 <th className="px-6 py-4">Contact (Product)</th>
                                 <th className="px-6 py-4 text-center"> user</th>
 
-                                <th className="px-6 py-4 text-center"> Date</th>
 
-                                <th className="px-6 py-4 text-center">Amount</th>
+                                <th className="px-6 py-4 text-center"> Date</th>
+    <th className="px-6 py-4 text-center"> Quantity</th>
+                                <th className="px-6 py-4 text-center">price</th>
                                 <th className="px-6 py-4 text-center">Status</th>
                                 
                             </tr>
@@ -76,8 +77,23 @@ function ViewOrdersAdmin() {
                                         <span className="font-bold text-gray-800 text-sm">{order.order_date}</span>
                                     </td>
                                     <td className="px-6 py-4 text-center">
-                                        <span className="font-bold text-gray-800 text-sm">${order.total_price}</span>
+                                        <span className="font-bold text-gray-800 text-sm">{order.quantity}</span>
                                     </td>
+                                    <td className="px-6 py-4 text-center">
+                                        <span className="font-bold text-gray-800 text-sm">{order.total_price} EGP</span>
+                                    </td>
+
+
+
+
+                                    
+
+
+
+
+
+                                    
+
 
                                     <td className="px-6 py-4 text-center">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 uppercase tracking-tight">

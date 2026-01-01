@@ -71,7 +71,7 @@ function NavbarUser() {
             <nav className=" sticky top-0 z-50 bg-pink-50 w-full h-fit  shadow-2xl shadow-pink-200 bg-pink-10 flex     items-center justify-between gap-6 md:justify-between md:gap-10 lg:justify-between xl:justify-between  min-w-full px-4 py-3 flex-wrap">
                 <div className="logo w-fit h-fit px-2.5 flex justify-center items-center hover:drop-shadow-xl drop-shadow-md drop-shadow-pink-200 hover:drop-shadow-pink-500 hover:text-white gap-3 py-1.5 bg-[var(--color-prinky)] rounded-3xl shadow-sm mr-6 hover:bg-pink-800 cursor-pointer transition-all duration-300 ease-in-out hover:scale-3d">
                     <img src={logo} alt="" width={40} height={45} className=" rounded-tl-2xl rounded-br-2xl" />
-                    <p className=" text-var[(--color-prinky)] text-2xl">hello {currentUser ? (currentUser.is_admin === true ? "Admin" : currentUser.firstName) : ""}</p>
+                    <p className=" text-var[(--color-prinky)] text-lg md:text-xl lg:text-2xl xl:text-3xl">hello {currentUser ? (currentUser.is_admin === true ? "Admin" : currentUser.firstName) : ""}</p>
                 </div>
                 {/* Right side (desktop) */}
                 <div className="hidden  lg:flex space-x-6">

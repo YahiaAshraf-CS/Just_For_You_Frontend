@@ -4,6 +4,7 @@ import Footer from "../layout/Footer";
 import NavbarUser from "../layout/NavbarUser";
 
 function Wishlist() {
+    //https://justforyoubackend-production.up.railway.app/api
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const [wishlistItems, setWishlistItems] = useState([]);
     const api = "https://justforyoubackend-production.up.railway.app/api";
@@ -91,7 +92,7 @@ function Wishlist() {
                                 <div className="p-5 flex flex-col flex-grow">
                                     <div className="mb-4">
                                         <h3 className="font-bold text-gray-900 text-lg leading-tight line-clamp-1 mb-1">{item.name}</h3>
-                                        <p className="text-xl font-bold text-pink-600">${item.price} EGP</p>
+                                        <p className="text-xl font-bold text-pink-600">{item.price} EGP</p>
                                     </div>
 
                                     {/* Action Button */}

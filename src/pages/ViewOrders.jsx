@@ -89,7 +89,7 @@ function ViewOrders() {
                                             ${order.total_price} <span className="text-xs text-gray-400 font-normal">EGP</span>
                                         </div>
                                         <span className="inline-flex items-center gap-1 px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-50 text-green-600 border border-green-100">
-                                            <FaCheckCircle size={10} /> Paid & Confirmed
+                                            <FaCheckCircle size={10} /> PANED
                                         </span>
                                     </div>
                                 </div>

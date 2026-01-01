@@ -151,39 +151,36 @@ function HomePage() {
                 </main>
             </section>
             {/* section types */}
-            <section id="types" className=" w-full h-fit flex flex-col items-center justify-center bg-pink- mt-15 mb-10 px-3 ">
-                <main>
-                    <div id="text2" className="flex justify-center items-center text-center gap-3 flex-col">
-                        <span className=" text-mg rounded-4xl font-bold w-fit h-fit px-4 py-2 text-center text-white bg-pink-600">Featured Collections</span>
-                        <h1 className=" text-5xl font-bold text-center text-pink-600">Curated Just For You</h1>
+            <section id="types" className="w-full h-fit flex flex-col items-center justify-center mt-16 mb-16 px-4">
+                <main className="container mx-auto">
+                    <div id="text2" className="flex justify-center items-center text-center gap-3 flex-col mb-10">
+                        <span className="text-md rounded-full font-bold px-4 py-2 text-white bg-pink-600">Featured Collections</span>
+                        <h1 className="text-3xl md:text-5xl font-bold text-pink-600">Curated Just For You</h1>
                     </div>
-                    <div
-                        id="cards"
-                        className="w-full h-fit   flex justify-center items-center flex-col md:flex-col md:gap-12 md:flex-wrap lg:gap-12 xl:flex-row lg:justify-around px-3 py-2 lg:flex-wrap lg:gap-3 xl-flex-nowrap xl:flex-nowrap xl:justify-between gap-5 mt-10">
-                        <div
-                            id="card1"
-                            className="flex shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl flex-col justify-start items-center  md:w-[93%]   gap-6 xl:w-[30%] h-[530px] px-3 py-4">
-                            <img src={gifts} className="w-[90%] h-[260px] rounded-2xl" alt="" />
-                            <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Amazing Gifts </h3>
-                            <p className="w-[90%] text-lg text-center text-gray-600">Thoughtfully curated gift boxes for birthdays, holidays, and special occasions</p>
 
-                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
+                    <div id="cards" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
+                        {/* Card 1 */}
+                        <div className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-600 rounded-2xl justify-between items-center w-full max-w-[380px] h-auto min-h-[500px] p-4 bg-white">
+                            <img src={gifts} className="w-full h-[260px] object-cover rounded-2xl" alt="Gifts" />
+                            <h3 className="text-2xl md:text-4xl text-center font-bold text-pink-600 mt-4">Amazing Gifts</h3>
+                            <p className="text-base md:text-lg text-center text-gray-600 px-2">Thoughtfully curated gift boxes for birthdays, holidays, and special occasions</p>
+                            <div className="mb-4 mt-2">{currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}</div>
                         </div>
-                        <div
-                            id="card2"
-                            className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl justify-start items-center md:w-[93%]  gap-6 xl:w-[30%]  h-[530px] px-3 py-4">
-                            <img src={acss} className="w-[90%] h-[260px] rounded-2xl" alt="" />
-                            <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Fashion Accessories</h3>
-                            <p className="w-[90%] text-center text-lg text-gray-600">Stylish Betels and accessories to complete your perfect look</p>
-                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
+
+                        {/* Card 2 */}
+                        <div className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-600 rounded-2xl justify-between items-center w-full max-w-[380px] h-auto min-h-[500px] p-4 bg-white">
+                            <img src={acss} className="w-full h-[260px] object-cover rounded-2xl" alt="Accessories" />
+                            <h3 className="text-2xl md:text-4xl text-center font-bold text-pink-600 mt-4">Fashion Accessories</h3>
+                            <p className="text-base md:text-lg text-center text-gray-600 px-2">Stylish Betels and accessories to complete your perfect look</p>
+                            <div className="mb-4 mt-2">{currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}</div>
                         </div>
-                        <div
-                            id="card3"
-                            className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-500 rounded-2xl justify-start items-center  md:w-[93%]  gap-6 xl:w-[30%] h-[530px] px-3 py-4">
-                            <img src={perfumes} className="w-[90%] h-[260px] rounded-2xl" alt="" />
-                            <h3 className="w-[90%] text-4xl text-center font-bold text-pink-600"> Wonderful Perfumes</h3>
-                            <p className="w-[90%] text-center text-lg text-gray-600"> Unleash your inner goddess with our exquisite perfumes</p>
-                            {currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}
+
+                        {/* Card 3 */}
+                        <div className="flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out shadow-pink-600 rounded-2xl justify-between items-center w-full max-w-[380px] h-auto min-h-[500px] p-4 bg-white">
+                            <img src={perfumes} className="w-full h-[260px] object-cover rounded-2xl" alt="Perfumes" />
+                            <h3 className="text-2xl md:text-4xl text-center font-bold text-pink-600 mt-4">Wonderful Perfumes</h3>
+                            <p className="text-base md:text-lg text-center text-gray-600 px-2">Unleash your inner goddess with our exquisite perfumes</p>
+                            <div className="mb-4 mt-2">{currentUser != null ? <ButtonPink to="/product">Shop Now</ButtonPink> : <ButtonLight to="/sign">Shop Now</ButtonLight>}</div>
                         </div>
                     </div>
                 </main>

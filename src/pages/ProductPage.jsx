@@ -1,13 +1,14 @@
+
 import React, { useEffect, useState } from "react";
-import { FaHeart, FaShoppingCart,FaTrash } from "react-icons/fa";
+import { FaHeart, FaPlus, FaMinus, FaShoppingCart,FaTrash } from "react-icons/fa";
 import Footer from "../layout/Footer";
 import ButtonPink from "../components/buttons/ButtonPink"; // Keeping import, though not used in new layout to keep logic safe
 import NavbarUser from "../layout/NavbarUser";
 
 
 const ProductPage = () => {
+     
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState(products);
 
@@ -30,8 +31,11 @@ const ProductPage = () => {
             setFilteredProducts(result);
         }
     };
+  
 
-    const handleAddToWishlist = async (product) => {
+       
+    
+    async function handleAddToWishlist(product) {
         const response = await fetch("https://justforyoubackend-production.up.railway.app/api/wishlist", {
             method: "POST",
             headers: {
@@ -54,7 +58,7 @@ const ProductPage = () => {
         }
 
         alert("Added to wishlist");
-    };
+    }
 
     const handleAddTocartlist = async (product) => {
         const response = await fetch("https://justforyoubackend-production.up.railway.app/api/cart", {
@@ -155,7 +159,7 @@ const ProductPage = () => {
                                     key={product.id}
                                     className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                                     {/* Product Image */}
-                                    <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
+                                    <div className="relative aspect-[4/4] overflow-hidden bg-gray-100">
                                         {/* Product Image */}
                                         {currentUser && currentUser.is_admin === true ? (
                                             <button
@@ -174,7 +178,7 @@ const ProductPage = () => {
                                         ) : null}
                                         <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                         {/* Badge for Stock Status */}
-                                        {product.stock <= 0 && <div className="absolute top-3 right-3 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">Sold Out</div>}
+                                        {product.stock <= 0 && <div className="absolute top-3 left-3 bg-gray-800 text-white text-xs font-bold px-3 py-1 rounded-full">Sold Out</div>}
                                     </div>
 
                                     {/* Product Details */}
@@ -189,9 +193,11 @@ const ProductPage = () => {
                                         {/* Stock Info (Admin vs User) */}
                                         <div className="mb-4 text-sm">
                                             {currentUser && currentUser.is_admin === true ? (
-                                                <div className="flex items-center text-gray-700 bg-gray-50 p-2 rounded-lg">
+                                                <div className="flex items-center text-gray-700 gap-3 bg-gray-50 p-2 rounded-lg">
                                                     <span className="font-semibold mr-2">Inventory:</span>
+
                                                     <span className={product.stock > 5 ? "text-green-600 font-bold" : "text-red-600 font-bold"}>{product.stock} units</span>
+                                                     
                                                 </div>
                                             ) : (
                                                 <span className={`text-xs font-bold px-2 py-1 rounded ${product.stock > 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>
