@@ -83,6 +83,18 @@ function ViewOrdersAdmin() {
                                         <span className="font-bold text-gray-800 text-sm">{order.total_price} EGP</span>
                                     </td>
 
+
+
+
+                                    
+
+
+
+
+
+                                    
+
+
                                     <td className="px-6 py-4 text-center">
                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200 uppercase tracking-tight">
                                             Panded
